@@ -1,0 +1,159 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@config "../tailwind.config.js";
+
+
+// Navigation bar
+$page-sections: ('home-section-button', 'skills-section-button', 'experience-section-button', 'projects-section-button', 'contact-section-button');
+$num-of-sections: length($page-sections);
+$item-width: 130px;
+$item-height: 90px;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  scroll-behavior: smooth;
+  scroll-padding-top: $item-height;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  line-height: 1.65;
+}
+
+.min-h-section {
+  min-height: calc(100vh - $item-height);
+}
+
+#navigation-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
+  box-shadow: 0px 12px 25px -12px rgba(0, 0, 0, 0.98);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+#menu-container {
+  max-width: 70%;
+}
+
+#menu-container svg {
+  width: 24px;
+  height: 24px;
+  fill: white;
+  margin-right: 10px;
+}
+
+#item-container ul {
+  display: grid;
+  grid-template-columns: repeat($num-of-sections, minmax(0, 1fr));
+  align-items: center;
+}
+
+#item-container li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: $item-width;
+  height: $item-height;
+}
+
+#item-container li a {
+  text-transform: uppercase;
+  color: white;
+  cursor: pointer;
+}
+
+#item-container .animation-button {
+  position: absolute;
+  margin: 0;
+  width: $item-width;
+  bottom: 0;
+  height: 5px;
+  background-color: white;
+  box-shadow: 0px -1px 15px 2px rgb(255 255 255 / 1.0);
+  transition: all 0.5s cubic-bezier(0.45, 0.51, 0.24, 0.95);
+}
+
+@for $i from 1 through $num-of-sections {
+
+  #item-container .#{nth($page-sections, $i)},
+  #item-container li:nth-child(#{$i}):hover~.animation-button {
+    width: $item-width;
+    right: $item-width*($num-of-sections - $i);
+    margin: 0;
+  }
+}
+
+#menu-icon {
+  display: none;
+}
+
+#logo-container {
+  height: $item-height;
+  display: flex;
+  align-items: center;
+  margin: 0 25px 0 25px;
+}
+
+// max-width -> ipad pro 12, tailwind: lg
+@media screen and (max-width: 1024px) {
+  #menu-container {
+    max-width: 100%;
+  }
+
+  #logo-container {
+    display: none;
+  }
+
+  #menu-icon {
+    width: 100%;
+    height: $item-height;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 24px
+  }
+
+  #menu-container #item-container .animation-button {
+    display: none;
+  }
+
+  #menu-container {
+    width: 100%;
+  }
+
+  #menu-container #item-container ul {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: calc(100vh - $item-height);
+    top: $item-height;
+    left: -100%;
+    transition: all 0.5s ease;
+  }
+
+  #menu-container #item-container ul.active {
+    background: #242222;
+    left: 0;
+    transition: left 0.5s ease;
+    z-index: 999;
+  }
+}
