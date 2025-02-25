@@ -1,187 +1,100 @@
-import React, { useRef, useEffect } from "react";
-
-// Image data [Base64]
+import React, { useRef, useEffect, useState, useMemo } from "react";
+import { useTheme } from "next-themes";
 import { IntroImage } from "@/constants";
-
-// Scroll Out
-// import ScrollOut from "scroll-out";
-
-let isAnimate = false;
 
 const PictToPix = (props) => {
   const canvasRef = useRef(null);
+  const { theme, systemTheme } = useTheme();
 
-  // ------------------------ Mount ------------------------ //
+  // Ensure the theme is available before using it
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  const resolvedTheme = useMemo(() => (theme === "system" ? systemTheme : theme), [theme, systemTheme]);
+
   useEffect(() => {
-    if (window.innerWidth > 1180) {
-      // Image
-      const image = new window.Image();
-      image.src = IntroImage;
-      image.onload = () => {
-        console.log('started creating canvas')
+    if (!mounted || window.innerWidth <= 1180) return;
 
-        // Canvas
-        const canvas = canvasRef.current;
-        const context = canvas.getContext("2d");
-        console.log(context)
+    const canvas = canvasRef.current;
+    const context = canvas.getContext("2d");
 
-        // Assign Canvas width and height
-        canvas.width = image.width;
-        canvas.height = image.height;
+    // Define colors based on theme
+    const primaryColor = resolvedTheme === "dark" ? "white" : "black";
 
-        // Particle Parameters
-        let particleArray = [];
-        const numberOfParticle = canvas.width;
+    // Load image
+    const image = new Image();
+    image.src = IntroImage;
 
-        // Draw image
-        context.drawImage(image, 0, 0, canvas.width, canvas.height);
-        // Get Iamge Data
-        const pixels = context.getImageData(0, 0, canvas.width, canvas.height);
-        // Clear Iamge
-        context.clearRect(0, 0, canvas.width, canvas.height);
+    image.onload = () => {
+      console.log("Started creating canvas");
 
-        const calculateRGB2Grey = (red, green, blue) => {
-          return Math.sqrt(
-            red ** 2 * 0.299 + green ** 2 * 0.587 + blue ** 2 * 0.114
-          );
-        };
+      // Scale for high resolution
+      const scaleFactor = window.devicePixelRatio || 1;
+      canvas.width = image.width * scaleFactor;
+      canvas.height = image.height * scaleFactor;
+      context.scale(scaleFactor, scaleFactor);
 
-        let mappedImage = [];
-        // Transform image pixels to rain effect
-        for (let row = 0; row < canvas.height; row++) {
-          let singleRow = [];
-          for (let col = 0; col < canvas.width; col++) {
-            const red = pixels.data[row * pixels.width * 4 + col * 4];
-            const green = pixels.data[row * pixels.width * 4 + col * 4 + 1];
-            const blue = pixels.data[row * pixels.width * 4 + col * 4 + 2];
-            const color = "rgb(" + red + "," + green + "," + blue + ")";
+      // Draw image to retrieve pixel data
+      context.drawImage(image, 0, 0, image.width, image.height);
+      const imageData = context.getImageData(0, 0, image.width, image.height);
+      const pixels = imageData.data;
 
-            const brightness = Math.min(
-              2.55,
-              calculateRGB2Grey(red, green, blue) / 100
-            );
-            const cell = [brightness, color];
-            singleRow.push(cell);
-          }
-          mappedImage.push(singleRow);
+      // Clear the canvas for particle rendering
+      context.clearRect(0, 0, image.width, image.height);
+
+      // Convert image pixels to brightness map using a TypedArray
+      const mappedImage = new Float32Array(image.width * image.height);
+      for (let i = 0, len = mappedImage.length; i < len; i++) {
+        const index = i * 4;
+        const r = pixels[index];
+        const g = pixels[index + 1];
+        const b = pixels[index + 2];
+
+        // Convert to brightness (grayscale)
+        const brightness = (0.299 * r ** 2 + 0.587 * g ** 2 + 0.114 * b ** 2) ** 0.5 / 255;
+        mappedImage[i] = brightness > 0 ? 2.0 : 0.0;
+      }
+
+      // Particle Class (Make sure it's properly closed)
+      class Particle {
+        constructor(x) {
+          this.x = x;
+          this.y = canvas.height;
+          this.velocity = 0.79;
+          this.size = 2;
         }
 
-        class Particle {
-          constructor(x) {
-            // Particle position
-            // this.x = Math.random() * canvas.width;
-            this.x = x;
-            this.y = canvas.height;
-            // Particle speed
-            this.speed = 0.0;
-            this.velocity = 0.75;
-            // Particle size
-            this.size = 1;
-            // mappedImage position
-            this.position1 = Math.floor(this.y);
-            this.position2 = Math.floor(this.x);
-          }
-          update() {
-            this.position1 = Math.floor(this.y);
-            this.position2 = Math.floor(this.x);
-
-            // Increase Brightness -> Increase Speed
-            if (mappedImage[this.position1]) {
-              if (mappedImage[this.position1][this.position2]) {
-                this.speed = mappedImage[this.position1][this.position2][0];
-              }
-            } else {
-              this.speed = 0;
-            }
-
-            let movement = Math.min(this.speed * 10 + this.velocity, 1.0);
-            this.y -= movement;
-          }
-          draw() {
-            context.beginPath();
-            if (mappedImage[this.position1]) {
-              if (mappedImage[this.position1][this.position2]) {
-                context.fillStyle =
-                  mappedImage[this.position1][this.position2][1];
-              }
-            } else {
-              context.fillStyle = "black";
-            }
-            context.rect(this.x, this.y, this.size, this.size);
-            context.fill();
-          }
+        update() {
+          const pos = Math.floor(this.y) * image.width + Math.floor(this.x);
+          this.speed = mappedImage[pos] || 0;
+          this.y -= Math.min(this.speed * 10 + this.velocity, 1.0);
         }
 
-        const init = () => {
-          for (let i = 0; i < numberOfParticle; i++) {
-            particleArray.push(new Particle(i));
-          }
-        };
+        draw() {
+          context.fillStyle = primaryColor;
+          context.fillRect(this.x, this.y, this.size, this.size);
+        }
+      }
 
-        let animateFrame;
-        const animate = () => {
-          context.globalAlpha = 0.2;
-          for (let i = 0; i < particleArray.length; i++) {
-            particleArray[i].update();
-            context.globalAlpha = particleArray[i].speed * 0.5;
-            particleArray[i].draw();
-          }
-          animateFrame = window.requestAnimationFrame(animate);
-        };
+      // Generate particles efficiently
+      const particles = Array.from({ length: image.width }, (_, i) => new Particle(i));
 
-        init();
-        animate();
-
-        // Scroll out
-        // ScrollOut({
-        //   targets: ".intro-canvas-logo",
-
-        //   /* Triggered when an element is shown */
-        //   onShown: function (element, ctx, scrollingElement) {
-        //     if (!isAnimate) {
-        //       // Start Animation
-        //       init();
-        //       animate();
-
-        //       // Cancel Animation Frame & Clear Variables
-        //       setTimeout(function () {
-        //         if (!isAnimate) {
-        //           window.cancelAnimationFrame(animateFrame);
-
-        //           particleArray = [];
-        //           isAnimate = false;
-
-        //           // console.log("Cancel Animation Frame");
-        //         }
-        //       }, 25000);
-
-        //       // Set Variables
-        //       isAnimate = true;
-        //     }
-        //   },
-
-        //   /* Triggered when an element is hidden */
-        //   onHidden: function (element, ctx, scrollingElement) {
-        //     if (isAnimate) {
-        //       // Clear Canvas
-        //       context.clearRect(0, 0, canvas.width, canvas.height);
-
-        //       // Cancel Animation Frame
-        //       try {
-        //         window.cancelAnimationFrame(animateFrame);
-        //       } catch {}
-
-        //       // Clear Variables
-        //       particleArray = [];
-        //       isAnimate = false;
-
-        //       // console.log("Cancel Animation Frame");
-        //     }
-        //   },
-        // });
+      const animate = () => {
+        context.globalAlpha = 0.5;
+        particles.forEach((particle) => {
+          particle.update();
+          context.globalAlpha = particle.speed * 0.5;
+          particle.draw();
+        });
+        requestAnimationFrame(animate);
       };
-    }
-  }, []);
+
+      animate();
+    };
+  }, [resolvedTheme, mounted]); // Only re-run when the theme or mount state changes
+
+  if (!mounted) return null; // Prevent hydration mismatch
+
   return <canvas className="intro-canvas-logo" ref={canvasRef} {...props} />;
 };
 

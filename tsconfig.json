@@ -23,6 +23,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "utils/PictToPix.js", "components/navbar/NavigationBar.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "utils/PictToPix.js", "components/navbar/NavigationBar.jsx", "constants/introImage.js"],
   "exclude": ["node_modules"]
 }

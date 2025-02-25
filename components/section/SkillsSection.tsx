@@ -1,34 +1,45 @@
-import { skillSet } from "@/constants";
+import { SKILL_INTRO, SKILL_SET } from "@/constants";
 
 export default function SkillsSection() {
   return (
-    <div className="skills-section min-h-section w-full" id="skills-section">
-      <section>
-        <div className="content">
-          <h1>
-            Skills
-            <hr></hr>
-          </h1>
-          <br />
-          <br />
-          <h2>The more I practice, the better I get 💪</h2>
-          <br />
-        </div>
-      </section>
-      <div className="grid grid-cols-4 gap-4">
-        {skillSet.map((data, index) => {
-          return (
-            <ul key={data.header} className={`text-black`}>
-              <h1>{data.header}</h1>
-              {data.skillsSet.map((skillData, indexSkillData) => {
-                return (
-                  <li key={skillData}>{skillData}</li>
-                )
-              })}
-            </ul>
-          );
-        })}
+    <section
+      className="skills-section min-h-section w-full py-16 bg-gray-50 dark:bg-dark-blue transition-colors duration-300"
+      id="skills-section"
+    >
+      {/* Section Title */}
+      <div className="text-center mb-10">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          Skills
+          <hr className="w-16 mx-auto mt-2 border-b-2 border-gray-500 dark:border-white" />
+        </h1>
+        <p className="mt-4 text-lg text-gray-700 dark:text-white">
+          Mastery comes with dedication, and I take pride in every step of my learning journey. The more I grow, the more I achieve. 💪
+        </p>
       </div>
-    </div>
-  )
+
+      {/* Skill Grid */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-6 md:px-12">
+        {SKILL_SET.map(({ category, skills }) => (
+          <div
+            key={category}
+            className="p-5 rounded-lg shadow-lg bg-white dark:bg-gunmetal transition-all hover:shadow-xl dark:hover:shadow-steel-grey"
+          >
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+              {category}
+            </h2>
+            <ul className="space-y-2 text-gray-800 dark:text-white">
+              {skills.map((skill) => (
+                <li
+                  key={skill}
+                  className="hover:text-white dark:hover:text-white transition-colors"
+                >
+                  {skill}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
 }

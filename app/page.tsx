@@ -1,48 +1,50 @@
 "use client";
 
 import { useCallback } from "react";
-import type { Container, Engine } from "tsparticles-engine";
+import type { Engine, Container } from "tsparticles-engine";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
-import { particlesConfig } from "@/constants";
+import { PARTICLES_CONFIG } from "@/constants";
 
-import NavigationBar from '@/components/navbar/NavigationBar'
-import { HomeSection, SkillsSection, ExperienceSection, ProjectsSection, ContactSection } from '@/components/section'
+import NavigationBar from "@/components/navbar/NavigationBar";
+import {
+  HomeSection,
+  SkillsSection,
+  ExperienceSection,
+  ProjectsSection,
+  ContactSection,
+} from "@/components/section";
+import {
+  Footer,
+} from "@/components/layout";
 
 export default function Home() {
   const particlesInit = useCallback(async (engine: Engine) => {
-    console.log(engine);
     await loadSlim(engine);
   }, []);
 
-  const particlesLoaded = useCallback(async (container: Container | undefined) => {
-    await console.log(container);
-  }, []);
-
   return (
-    <div className="w-full h-full flex flex-col dark:bg-slate-950">
-      {/* Navigation bar */}
-      <NavigationBar></NavigationBar>
+    <div className="w-full h-full flex flex-col relative bg-gray-50 dark:bg-dark-blue">
+      {/* Particle Background */}
+      <Particles
+        id="tsparticles"
+        init={particlesInit}
+        options={PARTICLES_CONFIG}
+        className="absolute inset-0"
+      />
 
-      {/* Contents */}
-      <div>
-        <HomeSection></HomeSection>
-        <SkillsSection></SkillsSection>
-        <ExperienceSection></ExperienceSection>
-        <ProjectsSection></ProjectsSection>
-        <ContactSection></ContactSection>
-      </div>
+      {/* Navigation Bar */}
+      <NavigationBar />
 
-      {/* Particle background */}
-      <div className="absolute">
-        <Particles
-          id="tsparticles"
-          init={particlesInit}
-          loaded={particlesLoaded}
-          options={particlesConfig}
-        />
-      </div>
-
-    </div >
-  )
+      {/* Main Content */}
+      <main className="flex-1 relative z-10">
+        <HomeSection />
+        <SkillsSection />
+        <ExperienceSection />
+        <ProjectsSection />
+        <ContactSection />
+        <Footer />
+      </main>
+    </div>
+  );
 }

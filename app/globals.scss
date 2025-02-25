@@ -8,7 +8,13 @@
 
 
 // Navigation bar
-$page-sections: ('home-section-button', 'skills-section-button', 'experience-section-button', 'projects-section-button', 'contact-section-button');
+$page-sections: (
+  'home-section-button',
+  'skills-section-button',
+  'experience-section-button',
+  'projects-section-button',
+  'contact-section-button'
+);
 $num-of-sections: length($page-sections);
 $item-width: 130px;
 $item-height: 90px;
@@ -45,6 +51,12 @@ body {
   box-shadow: 0px 12px 25px -12px rgba(0, 0, 0, 0.98);
   position: sticky;
   top: 0;
+  z-index: 999;
+}
+
+#footer {
+  background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
+  box-shadow: 0px 12px 25px -12px rgba(0, 0, 0, 0.98);
   z-index: 999;
 }
 
