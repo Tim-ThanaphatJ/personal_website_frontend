@@ -1,6 +1,8 @@
 "use client";
 
-export default function ExperienceSection() {
+import Image from "next/image";
+
+export default function ProjectsSection() {
   const gifUrl = "https://media.giphy.com/media/jUwpNzg9IcyrK/giphy.gif";
 
   return (
@@ -10,11 +12,14 @@ export default function ExperienceSection() {
     >
       {/* Glassmorphism Container */}
       <div className="relative bg-white/80 dark:bg-gunmetal/80 backdrop-blur-md p-10 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 text-center max-w-lg">
-        {/* Cute GIF (Fixed) */}
-        <img
+        {/* Cute GIF (Now using `next/image`) */}
+        <Image
           src={gifUrl}
           alt="Under Construction"
-          className="mx-auto rounded-lg shadow-md w-[250px] h-[250px]"
+          width={250}
+          height={250}
+          unoptimized={true} // ✅ Prevents optimization for external images
+          className="mx-auto rounded-lg shadow-md"
         />
 
         {/* Title */}
@@ -24,7 +29,7 @@ export default function ExperienceSection() {
 
         {/* Subtitle */}
         <p className="mt-3 text-lg text-gray-700 dark:text-white">
-          I'm working on something awesome! Check back soon.
+          I&apos;m working on something awesome! Check back soon.
         </p>
 
         {/* Back to Home Button */}

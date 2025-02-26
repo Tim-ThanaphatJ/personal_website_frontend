@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { TypeAnimation } from 'react-type-animation';
 
-import { HOME_INTRO, NAV_LINKS, ANIMATION_TYPING_SPEED } from '@/constants';
+import { HOME_INTRO, NAV_LINKS, ANIMATION_TYPING_SPEED } from '@/config/constants';
 import PictToPix from "@/utils/PictToPix";
 
 export default function HomeSection() {

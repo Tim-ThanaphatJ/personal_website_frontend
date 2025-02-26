@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import ScrollOut from "scroll-out";
-import { NAV_LINKS } from "@/constants";
-import ThemeSwitcher from "@/app/ThemeSwitcher";
+import { NAV_LINKS } from "@/config/constants";
+import ThemeSwitcher from "@/components/common/ThemeSwitcher";
 
 /** Generates a string of section IDs for ScrollOut */
 const getSectionTargets = () => NAV_LINKS.map((link) => `#${link.refID}`).join(",");

@@ -4,19 +4,15 @@ import { useCallback } from "react";
 import type { Engine, Container } from "tsparticles-engine";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
-import { PARTICLES_CONFIG } from "@/constants";
+import { PARTICLES_CONFIG } from "@/config/constants";
 
-import NavigationBar from "@/components/navbar/NavigationBar";
-import {
-  HomeSection,
-  SkillsSection,
-  ExperienceSection,
-  ProjectsSection,
-  ContactSection,
-} from "@/components/section";
-import {
-  Footer,
-} from "@/components/layout";
+import NavigationBar from "@/components/layout/NavigationBar";
+import Footer from "@/components/layout/Footer"
+import HomeSection from "@/components/sections/HomeSection";
+import SkillsSection from "@/components/sections/SkillsSection";
+import ExperienceSection from "@/components/sections/ExperienceSection";
+import ProjectsSection from "@/components/sections/ProjectsSection";
+import ContactSection from "@/components/sections/ContactSection";
 
 export default function Home() {
   const particlesInit = useCallback(async (engine: Engine) => {

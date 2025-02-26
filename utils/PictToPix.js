@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState, useMemo } from "react";
 import { useTheme } from "next-themes";
-import { IntroImage } from "@/constants";
+import { INTRO_IMAGE } from "@/config/constants";
 
 const PictToPix = (props) => {
   const canvasRef = useRef(null);
@@ -23,7 +23,7 @@ const PictToPix = (props) => {
 
     // Load image
     const image = new Image();
-    image.src = IntroImage;
+    image.src = INTRO_IMAGE;
 
     image.onload = () => {
       console.log("Started creating canvas");

@@ -1,4 +1,4 @@
-import { SKILL_INTRO, SKILL_SET } from "@/constants";
+import { SKILL_INTRO, SKILL_SET } from "@/config/constants";
 
 export default function SkillsSection() {
   return (

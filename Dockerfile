@@ -19,9 +19,5 @@ ENV NODE_ENV=development
 # Expose port 3000 (default for Next.js dev server)
 EXPOSE 3000
 
-# Build and export the Next.js app
-CMD ["npm", "run", "build"]
-CMD ["npm", "run", "export"]
-
 # Start Next.js development server
 CMD ["npm", "run", "dev"]

@@ -22,5 +22,3 @@ module.exports = {
   },
   plugins: [],
 }
-
-// Can you make this to have a same theme when it light and when it dark use dark-blue keyword only

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { FaFacebook, FaLinkedin, FaInstagram, FaXTwitter } from "react-icons/fa6";
-import { PERSONAL_INFO } from "@/constants";
+import { PERSONAL_INFO } from "@/config/constants";
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -42,11 +42,11 @@ export default function ContactSection() {
       {/* Section Title */}
       <div className="text-center mb-10">
         <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white tracking-wide">
-          Let's Connect
+          Let&apos;s Connect
           <hr className="w-16 mx-auto mt-2 border-b-4 border-blue-500 dark:border-[#64ffda]" />
         </h1>
         <p className="mt-4 text-lg text-gray-700 dark:text-white">
-          Feel free to reach out. I’d love to chat! 🚀
+          Feel free to reach out. I&apos;d love to chat! 🚀
         </p>
       </div>
 
@@ -120,7 +120,7 @@ export default function ContactSection() {
       {/* X (Twitter) Message */}
       {showXMessage && (
         <div className="mt-4 text-red-500 dark:text-red-400 font-semibold animate-fade">
-          ❌ I don't have an X account!
+          ❌ I don&apos;t have an X account!
         </div>
       )}
     </section>
