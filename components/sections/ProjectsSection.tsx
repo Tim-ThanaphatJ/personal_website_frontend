@@ -1,10 +1,8 @@
 "use client";
 
-import Image from "next/image";
+const underConstruction = "/gif/underConstruction.gif";
 
 export default function ProjectsSection() {
-  const gifUrl = "https://media.giphy.com/media/jUwpNzg9IcyrK/giphy.gif";
-
   return (
     <section
       id="projects-section"
@@ -12,13 +10,11 @@ export default function ProjectsSection() {
     >
       {/* Glassmorphism Container */}
       <div className="relative bg-white/80 dark:bg-gunmetal/80 backdrop-blur-md p-10 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 text-center max-w-lg">
-        {/* Cute GIF (Now using `next/image`) */}
-        <Image
-          src={gifUrl}
+        <img
+          src={underConstruction}
           alt="Under Construction"
           width={250}
           height={250}
-          unoptimized={true} // ✅ Prevents optimization for external images
           className="mx-auto rounded-lg shadow-md"
         />
 

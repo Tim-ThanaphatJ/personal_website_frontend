@@ -17,6 +17,8 @@ module.exports = {
         'off-white': '#CCD6F6',
         'charcoal': '#2E2E2E',
         'gunmetal': '#1F2933',
+        'light-blue': '#ADD8E6',
+        'light-green': 'rgba(100, 255, 218, 0.6)',
       },
     },
   },

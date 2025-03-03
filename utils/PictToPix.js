@@ -4,6 +4,7 @@ import { INTRO_IMAGE } from "@/config/constants";
 
 const PictToPix = (props) => {
   const canvasRef = useRef(null);
+  const animationFrameIdRef = useRef(null); // Store animation frame reference
   const { theme, systemTheme } = useTheme();
 
   // Ensure the theme is available before using it
@@ -16,18 +17,21 @@ const PictToPix = (props) => {
     if (!mounted || window.innerWidth <= 1180) return;
 
     const canvas = canvasRef.current;
-    const context = canvas.getContext("2d");
+    const context = canvas.getContext("2d", { willReadFrequently: true });
 
     // Define colors based on theme
     const primaryColor = resolvedTheme === "dark" ? "white" : "black";
+
+    // Cancel any previous animation
+    if (animationFrameIdRef.current) {
+      cancelAnimationFrame(animationFrameIdRef.current);
+    }
 
     // Load image
     const image = new Image();
     image.src = INTRO_IMAGE;
 
     image.onload = () => {
-      console.log("Started creating canvas");
-
       // Scale for high resolution
       const scaleFactor = window.devicePixelRatio || 1;
       canvas.width = image.width * scaleFactor;
@@ -39,8 +43,8 @@ const PictToPix = (props) => {
       const imageData = context.getImageData(0, 0, image.width, image.height);
       const pixels = imageData.data;
 
-      // Clear the canvas for particle rendering
-      context.clearRect(0, 0, image.width, image.height);
+      // Clear the canvas to prevent overlay issues
+      context.clearRect(0, 0, canvas.width, canvas.height);
 
       // Convert image pixels to brightness map using a TypedArray
       const mappedImage = new Float32Array(image.width * image.height);
@@ -55,7 +59,7 @@ const PictToPix = (props) => {
         mappedImage[i] = brightness > 0 ? 2.0 : 0.0;
       }
 
-      // Particle Class (Make sure it's properly closed)
+      // Particle Class
       class Particle {
         constructor(x) {
           this.x = x;
@@ -86,14 +90,21 @@ const PictToPix = (props) => {
           context.globalAlpha = particle.speed * 0.5;
           particle.draw();
         });
-        requestAnimationFrame(animate);
+        animationFrameIdRef.current = requestAnimationFrame(animate);
       };
 
       animate();
     };
-  }, [resolvedTheme, mounted]); // Only re-run when the theme or mount state changes
 
-  if (!mounted) return null; // Prevent hydration mismatch
+    // Cleanup function to stop animation when component unmounts or theme changes
+    return () => {
+      if (animationFrameIdRef.current) {
+        cancelAnimationFrame(animationFrameIdRef.current);
+      }
+    };
+  }, [resolvedTheme, mounted]);
+
+  if (!mounted) return null;
 
   return <canvas className="intro-canvas-logo" ref={canvasRef} {...props} />;
 };

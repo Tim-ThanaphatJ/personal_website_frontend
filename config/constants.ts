@@ -10,8 +10,8 @@ export const ANIMATION_TYPING_SPEED = 25;
 export const NAV_LINKS = [
   { displayName: "Home", refID: "home-section", sectionButton: "home-section-button" },
   { displayName: "Skills", refID: "skills-section", sectionButton: "skills-section-button" },
-  { displayName: "Experience", refID: "experience-section", sectionButton: "experience-section-button" },
   { displayName: "Projects", refID: "projects-section", sectionButton: "projects-section-button" },
+  { displayName: "Experience", refID: "experience-section", sectionButton: "experience-section-button" },
   { displayName: "Contact", refID: "contact-section", sectionButton: "contact-section-button" },
 ];
 
@@ -87,8 +87,6 @@ export const SKILL_SET = [
 
 // Personal Info
 export const PERSONAL_INFO = {
-  email: "ji.thanaphat@gmail.com",
-  facebook: "",
-  linkedin: "",
-  instagram: "",
+  linkedin: "https://www.linkedin.com/in/thanaphat-jiamcharoendet/",
+  github: "https://github.com/Tim-ThanaphatJ",
 };

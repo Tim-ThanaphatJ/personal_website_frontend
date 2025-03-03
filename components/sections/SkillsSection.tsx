@@ -13,7 +13,7 @@ export default function SkillsSection() {
           <hr className="w-16 mx-auto mt-2 border-b-2 border-gray-500 dark:border-white" />
         </h1>
         <p className="mt-4 text-lg text-gray-700 dark:text-white">
-          Mastery comes with dedication, and I take pride in every step of my learning journey. The more I grow, the more I achieve. 💪
+          {SKILL_INTRO}
         </p>
       </div>
 
@@ -31,7 +31,7 @@ export default function SkillsSection() {
               {skills.map((skill) => (
                 <li
                   key={skill}
-                  className="hover:text-white dark:hover:text-white transition-colors"
+                  className="hover:text-light-blue dark:hover:text-light-green transition-colors"
                 >
                   {skill}
                 </li>

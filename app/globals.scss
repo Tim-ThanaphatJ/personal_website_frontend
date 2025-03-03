@@ -11,8 +11,8 @@
 $page-sections: (
   'home-section-button',
   'skills-section-button',
-  'experience-section-button',
   'projects-section-button',
+  'experience-section-button',
   'contact-section-button'
 );
 $num-of-sections: length($page-sections);

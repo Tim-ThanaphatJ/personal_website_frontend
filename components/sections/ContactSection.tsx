@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { FaFacebook, FaLinkedin, FaInstagram, FaXTwitter } from "react-icons/fa6";
+import { FaFacebook, FaLinkedin, FaInstagram, FaXTwitter, FaGithub } from "react-icons/fa6";
 import { PERSONAL_INFO } from "@/config/constants";
 
 export default function ContactSection() {
@@ -21,7 +21,7 @@ export default function ContactSection() {
     const { name, email, message } = formData;
 
     if (name && email && message) {
-      const mailtoLink = `mailto:${PERSONAL_INFO.email}?subject=New Contact Form Message from ${name}&body=Name: ${name}%0D%0AEmail: ${email}%0D%0AMessage: ${message}`;
+      const mailtoLink = `mailto:${email}?subject=New Contact Form Message from ${name}&body=Name: ${name}%0D%0AEmail: ${email}%0D%0AMessage: ${message}`;
       window.location.href = mailtoLink;
       setSubmitted(true);
     }
@@ -32,12 +32,10 @@ export default function ContactSection() {
     setTimeout(() => setShowXMessage(false), 2000);
   };
 
-  if (!mounted) return null;
-
   return (
     <section
       id="contact-section"
-      className="contact-section min-h-[calc(100vh-90px)] w-full py-16 px-6 md:px-12 flex flex-col items-center"
+      className="contact-section w-full min-h-[calc(100vh-90px)] flex items-center justify-center w-full py-16 px-6 md:px-12 flex-col" 
     >
       {/* Section Title */}
       <div className="text-center mb-10">
@@ -54,7 +52,7 @@ export default function ContactSection() {
       <div className="w-full max-w-2xl relative bg-white/80 dark:bg-gunmetal/80 backdrop-blur-lg p-8 rounded-xl shadow-xl border border-gray-300 dark:border-gray-700">
         {submitted ? (
           <div className="text-center text-lg text-green-600 dark:text-green-400">
-            ✅ Thank you! Your email client should open now.
+            Thank you! 🍻
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col space-y-6">
@@ -100,16 +98,12 @@ export default function ContactSection() {
 
       {/* Social Media Links */}
       <div className="flex space-x-6 mt-10">
-        <a href={PERSONAL_INFO.facebook} target="_blank" rel="noopener noreferrer">
-          <FaFacebook className="text-3xl text-gray-900 dark:text-white hover:text-blue-600 transition-transform transform hover:scale-110" />
-        </a>
-
         <a href={PERSONAL_INFO.linkedin} target="_blank" rel="noopener noreferrer">
           <FaLinkedin className="text-3xl text-gray-900 dark:text-white hover:text-blue-500 transition-transform transform hover:scale-110" />
         </a>
 
-        <a href={PERSONAL_INFO.instagram} target="_blank" rel="noopener noreferrer">
-          <FaInstagram className="text-3xl text-gray-900 dark:text-white hover:text-pink-500 transition-transform transform hover:scale-110" />
+        <a href={PERSONAL_INFO.github} target="_blank" rel="noopener noreferrer">
+          <FaGithub className="text-3xl text-gray-900 dark:text-white hover:text-pink-500 transition-transform transform hover:scale-110" />
         </a>
 
         <button onClick={handleXClick}>
