@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { FaFacebook, FaLinkedin, FaInstagram, FaXTwitter, FaGithub } from "react-icons/fa6";
+import { FaLinkedin, FaXTwitter, FaGithub } from "react-icons/fa6";
 import { PERSONAL_INFO } from "@/config/constants";
 
 export default function ContactSection() {
@@ -21,7 +21,13 @@ export default function ContactSection() {
     const { name, email, message } = formData;
 
     if (name && email && message) {
-      const mailtoLink = `mailto:${email}?subject=New Contact Form Message from ${name}&body=Name: ${name}%0D%0AEmail: ${email}%0D%0AMessage: ${message}`;
+      const recipientEmail = PERSONAL_INFO.email; // Replace with your actual email
+
+      const subject = encodeURIComponent(`New Contact Form Message from ${name}`);
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nMessage: ${message}`);
+
+      const mailtoLink = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
+
       window.location.href = mailtoLink;
       setSubmitted(true);
     }

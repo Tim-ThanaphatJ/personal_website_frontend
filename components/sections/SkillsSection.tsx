@@ -3,7 +3,7 @@ import { SKILL_INTRO, SKILL_SET } from "@/config/constants";
 export default function SkillsSection() {
   return (
     <section
-      className="skills-section min-h-section w-full py-16 bg-gray-50 dark:bg-dark-blue transition-colors duration-300"
+      className="skills-section min-h-section w-full py-16"
       id="skills-section"
     >
       {/* Section Title */}

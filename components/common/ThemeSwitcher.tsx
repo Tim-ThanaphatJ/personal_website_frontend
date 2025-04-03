@@ -42,17 +42,20 @@ const Moon = (props: SVGProps<SVGSVGElement>) => (
 );
 
 const ThemeSwitcher = () => {
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // Ensure component is mounted to avoid hydration errors
   useEffect(() => {
+    if (!theme) {
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      setTheme(prefersDark ? "dark" : "light");
+    }
     setMounted(true);
-  }, []);
+  }, [theme, setTheme]);
 
-  if (!mounted) return null; // Prevents server-side mismatch issues
+  if (!mounted) return null;
 
-  const isDarkMode = theme === "dark";
+  const isDarkMode = resolvedTheme === "dark";
 
   return (
     <div className="flex flex-row items-center text-white text-4xl">

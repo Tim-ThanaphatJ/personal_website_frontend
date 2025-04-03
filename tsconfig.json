@@ -34,6 +34,7 @@
     "app/",
     "components/",
     "config/",
+    "public/",
     "utils/",
     "**/*.ts",
     "**/*.tsx",

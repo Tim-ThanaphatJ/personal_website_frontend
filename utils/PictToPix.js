@@ -1,5 +1,7 @@
 import React, { useRef, useEffect, useState, useMemo } from "react";
 import { useTheme } from "next-themes";
+
+const introductionLogo = "/images/FullLogo_Transparent.png";
 import { INTRO_IMAGE } from "@/config/constants";
 
 const PictToPix = (props) => {
@@ -11,7 +13,10 @@ const PictToPix = (props) => {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  const resolvedTheme = useMemo(() => (theme === "system" ? systemTheme : theme), [theme, systemTheme]);
+  const resolvedTheme = useMemo(
+    () => (theme === "system" ? systemTheme : theme),
+    [theme, systemTheme]
+  );
 
   useEffect(() => {
     if (!mounted || window.innerWidth <= 1180) return;
@@ -42,11 +47,16 @@ const PictToPix = (props) => {
       context.drawImage(image, 0, 0, image.width, image.height);
       const imageData = context.getImageData(0, 0, image.width, image.height);
       const pixels = imageData.data;
+  
+      console.log("Image Src:", image.src);
+      console.log("Pixels:", pixels);
+      console.log(`Dimensions: [${pixels.length} x ${pixels[0].length}]`);
+      console.log(`canvas: [${canvas.width} x ${canvas.height}]`);
 
-      // Clear the canvas to prevent overlay issues
+      // Clear the canvas before applying transformations
       context.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Convert image pixels to brightness map using a TypedArray
+      // Convert image pixels to brightness map
       const mappedImage = new Float32Array(image.width * image.height);
       for (let i = 0, len = mappedImage.length; i < len; i++) {
         const index = i * 4;
@@ -105,8 +115,7 @@ const PictToPix = (props) => {
   }, [resolvedTheme, mounted]);
 
   if (!mounted) return null;
-
-  return <canvas className="intro-canvas-logo" ref={canvasRef} {...props} />;
+  return  <canvas className="intro-canvas-logo" ref={canvasRef} {...props} />;
 };
 
 export default PictToPix;

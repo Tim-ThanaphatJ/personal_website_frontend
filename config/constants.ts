@@ -11,7 +11,6 @@ export const NAV_LINKS = [
   { displayName: "Home", refID: "home-section", sectionButton: "home-section-button" },
   { displayName: "Skills", refID: "skills-section", sectionButton: "skills-section-button" },
   { displayName: "Projects", refID: "projects-section", sectionButton: "projects-section-button" },
-  { displayName: "Experience", refID: "experience-section", sectionButton: "experience-section-button" },
   { displayName: "Contact", refID: "contact-section", sectionButton: "contact-section-button" },
 ];
 
@@ -57,31 +56,35 @@ export const SKILL_INTRO = "Mastery comes with dedication, and I take pride in e
 export const SKILL_SET = [
   {
     category: "🔌 Programming",
-    skills: ["Python", "HTML/CSS/JavaScript", "SQL", "Bash", "C/C++/C#"],
-  },
-  {
-    category: "🤖 AI / Machine Learning",
-    skills: ["TensorFlow", "scikit-learn"],
+    skills: ["Python", "JavaScript/TypeScript", "SQL", "Bash/Shell Scripting", "C/C++/C#"],
   },
   {
     category: "🕸️ Frontend Web Development",
-    skills: ["ReactJS", "HTML/CSS/JavaScript", "Bootstrap", "Material UI", "Three.js", "Canvas"],
+    skills: ["React.js", "Next.js", "Tailwind CSS", "Bootstrap"],
   },
   {
     category: "🖥️ Backend Web Development",
-    skills: ["Flask", "Node.js"],
+    skills: ["Node.js (Express.js)", "FastAPI", "Django", "Flask"],
   },
   {
-    category: "🤖 Robotics",
-    skills: ["ROS", "ROS2"],
+    category: "🤖 Cloud & DevOps",
+    skills: ["AWS (Lambda, Step Function and stuffs related to ETL)", "Terraform", "Kubernetes", "Docker", "CI/CD (GitHub Actions)"],
   },
   {
-    category: "👨‍💻 DevOps",
-    skills: ["Agile", "Scrum", "Git"],
+    category: "🤖 Data Engineering & Big Data",
+    skills: ["PySpark", "Pandas", "AWS Glue"],
   },
   {
-    category: "👍 Other Skills",
-    skills: ["Embedded Systems", "Jetson Nano / Raspberry Pi / Arduino", "3D CAD", "Circuit Design", "Ladder Logic"],
+    category: "👨‍💻 Databases",
+    skills: ["PostgreSQL", "MySQL", "AuroaDB", "MongoDB"],
+  },
+  {
+    category: "👨‍💻 Security & Compliance",
+    skills: ["GDPR Compliance", "IAM", "OAuth2 / JWT"],
+  },
+  {
+    category: "👍 Miscellaneous",
+    skills: ["Pine Script", "Financial Data Analysis", "TensorFlow", "NLP", "Microcontroller (Jetson Nano / Raspberry Pi / Arduino)"],
   },
 ];
 
@@ -89,4 +92,5 @@ export const SKILL_SET = [
 export const PERSONAL_INFO = {
   linkedin: "https://www.linkedin.com/in/thanaphat-jiamcharoendet/",
   github: "https://github.com/Tim-ThanaphatJ",
+  email: "ji.thanaphat@gmail.com",
 };

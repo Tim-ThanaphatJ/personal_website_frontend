@@ -10,7 +10,6 @@ import NavigationBar from "@/components/layout/NavigationBar";
 import Footer from "@/components/layout/Footer"
 import HomeSection from "@/components/sections/HomeSection";
 import SkillsSection from "@/components/sections/SkillsSection";
-import ExperienceSection from "@/components/sections/ExperienceSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import ContactSection from "@/components/sections/ContactSection";
 
@@ -20,7 +19,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="w-full h-full flex flex-col relative bg-gray-50 dark:bg-dark-blue">
+    <div className="w-full h-full flex flex-col relative bg-gray-50 dark:bg-dark-blue transition-colors duration-300">
       {/* Particle Background */}
       <Particles
         id="tsparticles"
@@ -37,7 +36,6 @@ export default function Home() {
         <HomeSection />
         <SkillsSection />
         <ProjectsSection />
-        <ExperienceSection />
         <ContactSection />
         <Footer />
       </main>

@@ -1,6 +1,6 @@
 "use client";
 
-const underConstruction = "/gif/underConstruction.gif";
+const underConstruction = "/gifs/underConstruction.gif";
 
 export default function ProjectsSection() {
   return (
