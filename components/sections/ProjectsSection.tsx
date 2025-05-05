@@ -116,7 +116,7 @@ export default function ProjectsSection() {
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen
-                    referrerpolicy="strict-origin-when-cross-origin"
+                    referrerPolicy="strict-origin-when-cross-origin"
                     className="absolute top-0 left-0 w-full h-full rounded-t-2xl"
                   ></iframe>
                 </div>
