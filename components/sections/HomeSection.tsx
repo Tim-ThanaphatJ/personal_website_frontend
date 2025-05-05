@@ -51,7 +51,7 @@ export default function HomeSection() {
           {/* 🔹 First Div: Background Text with Opacity */}
           <div
             id="home-intro-container"
-            className={`absolute opacity-10 z-0 mr-24 ${state.isMobileView ? "ml-24" : ""}`}
+            className={`absolute opacity-10 z-0 ${state.isMobileView ? "mr-24" : "mr-8"} ${state.isMobileView ? "ml-24" : "ml-8"}`}
           >
             <h1 className="text-2xl my-6">{HOME_INTRO.greeting}</h1>
             <strong className="text-5xl">{HOME_INTRO.name}</strong>
@@ -67,7 +67,7 @@ export default function HomeSection() {
           {/* 🔹 Second Div: Animated Text Overlaying the First One */}
           {state.containerHeight > 0 && (
             <div
-              className={`absolute z-10 mr-24 ${state.isMobileView ? "ml-24" : ""}`}
+              className={`absolute z-10 ${state.isMobileView ? "mr-24" : "mr-8"} ${state.isMobileView ? "ml-24" : "ml-8"}`}
               style={{ minHeight: `${state.containerHeight}px` }}
             >
               <TypeAnimation
