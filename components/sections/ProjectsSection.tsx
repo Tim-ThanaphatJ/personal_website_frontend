@@ -18,16 +18,16 @@ const projects = [
     start: "10",
   },
   {
-    title: "Web application for visualizing data",
-    description:
-      "Built a ReactJS single-page application to stream real-time industrial robot data, including robot maps and pose tracking. Enabled the robotics team to quickly generate and update robot maps for new environments, improving efficiency and reducing setup time. Integrated live data feeds for accurate, responsive visualization and enhanced operational workflows.",
-    image: "/images/robot_web_app.png",
-  },
-  {
     title: "Web application for non-programable user to control robot",
     description:
       "Developed a platform enabling non-programmers to remotely control and program mobile robots with auto-guiding and mapping functions for navigation to specific points in real-world environments. Collaborated with Dr. Poom Konghuayrob and a team of three robotics students to design, build, and optimize the system for ease of use.",
     video: "https://www.youtube.com/embed/STa7BiRSQl4",
+  },
+  {
+    title: "Web application for visualizing data",
+    description:
+      "Built a ReactJS single-page application to stream real-time industrial robot data, including robot maps and pose tracking. Enabled the robotics team to quickly generate and update robot maps for new environments, improving efficiency and reducing setup time. Integrated live data feeds for accurate, responsive visualization and enhanced operational workflows.",
+    image: "/images/robot_web_app.png",
   },
   {
     title: "Online resume",
@@ -53,12 +53,12 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects-section"
-      className="projects-section min-h-section w-full relative"
+      className="projects-section min-h-section w-full relative px-4 sm:px-0"
     >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-10">
           <motion.h2
-            className="text-3xl font-bold text-gray-900 dark:text-white"
+            className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, amount: 0.8 }}
@@ -68,7 +68,7 @@ export default function ProjectsSection() {
             <hr className="w-16 mx-auto mt-2 border-b-4 border-blue-500 dark:border-[#64ffda]" />
           </motion.h2>
           <motion.p
-            className="mt-4 text-lg text-gray-700 dark:text-white"
+            className="mt-4 text-base sm:text-lg text-gray-700 dark:text-white"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, amount: 0.8 }}
@@ -100,18 +100,24 @@ export default function ProjectsSection() {
                   onMouseEnter={(e) => {
                     const iframe = e.currentTarget.querySelector("iframe");
                     if (iframe) {
-                      iframe.src = `${project.video}?showinfo=0&autoplay=1&mute=1&modestbranding=0&rel=0&autohide=1&controls=1&iv_load_policy=3&disablekb=1${project.start ? `&start=${project.start}` : ''}`;
+                      iframe.src = `${project.video}?showinfo=0&autoplay=1&mute=1&modestbranding=0&rel=0&autohide=1&controls=1&iv_load_policy=3&disablekb=1${
+                        project.start ? `&start=${project.start}` : ""
+                      }`;
                     }
                   }}
                   onMouseLeave={(e) => {
                     const iframe = e.currentTarget.querySelector("iframe");
                     if (iframe) {
-                      iframe.src = `${project.video}?showinfo=0&autoplay=0&mute=1&modestbranding=0&rel=0&autohide=1&controls=1&iv_load_policy=3&disablekb=1${project.start ? `&start=${project.start}` : ''}`;
+                      iframe.src = `${project.video}?showinfo=0&autoplay=0&mute=1&modestbranding=0&rel=0&autohide=1&controls=1&iv_load_policy=3&disablekb=1${
+                        project.start ? `&start=${project.start}` : ""
+                      }`;
                     }
                   }}
                 >
                   <iframe
-                    src={`${project.video}?showinfo=0&autoplay=0&mute=1&modestbranding=0&rel=0&autohide=1&controls=1&iv_load_policy=3&disablekb=1${project.start ? `&start=${project.start}` : ''}`}
+                    src={`${project.video}?showinfo=0&autoplay=0&mute=1&modestbranding=0&rel=0&autohide=1&controls=1&iv_load_policy=3&disablekb=1${
+                      project.start ? `&start=${project.start}` : ""
+                    }`}
                     title={project.title}
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

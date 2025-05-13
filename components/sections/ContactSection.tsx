@@ -22,7 +22,7 @@ export default function ContactSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (isSending) return; // Prevent duplicate submissions
+    if (isSending) return;
 
     const { name, email, message } = formData;
 
@@ -59,36 +59,33 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact-section" className="contact-section min-h-screen flex flex-col items-center justify-center px-6 py-16">
+    <section id="contact-section" className="contact-section min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 md:px-12 py-16">
       <Toaster position="top-center" reverseOrder={false} />
 
-      
-
       <div className="text-center mb-10">
-      <motion.h2
-        className="text-3xl font-bold text-gray-900 dark:text-white"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, amount: 0.8 }}
-        transition={{ duration: 0.8 }}
-      >
-        Let&apos;s Connect
-        <hr className="w-16 mx-auto mt-2 border-b-4 border-blue-500 dark:border-[#64ffda]" />
-      </motion.h2>
-      <motion.p
-        className="mt-4 text-lg text-gray-700 dark:text-white"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, amount: 0.8 }}
-        transition={{ delay: 0.2, duration: 0.8 }}
-      >
-        Whether it&apos;s a collaboration, an opportunity, or just a friendly hello — I&apos;m always open to connect!
-      </motion.p>
-        </div>
-
+        <motion.h2
+          className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.8 }}
+          transition={{ duration: 0.8 }}
+        >
+          Let&apos;s Connect
+          <hr className="w-16 mx-auto mt-2 border-b-4 border-blue-500 dark:border-[#64ffda]" />
+        </motion.h2>
+        <motion.p
+          className="mt-4 text-md sm:text-lg text-gray-700 dark:text-white"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.8 }}
+          transition={{ delay: 0.2, duration: 0.8 }}
+        >
+          Whether it&apos;s a collaboration, an opportunity, or just a friendly hello — I&apos;m always open to connect!
+        </motion.p>
+      </div>
 
       <motion.div
-        className="w-full max-w-2xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg p-8 rounded-xl shadow-xl border border-gray-300 dark:border-gray-700"
+        className="w-full max-w-2xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg p-6 sm:p-8 rounded-xl shadow-xl border border-gray-300 dark:border-gray-700"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.5 }}
